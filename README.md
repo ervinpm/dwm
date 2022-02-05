@@ -52,7 +52,7 @@ The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
 
 ## Modifications
-- Added lock screen using lightdm tool `[MOD][SHIFT] + L`
+- Added lock screen using lightdm tool <kbd>MOD</kbd><kbd>SHIFT</kbd> + <kbd>L</kbd>`
 - Added full gaps
 - Theme colors
 - NerdFont icons
