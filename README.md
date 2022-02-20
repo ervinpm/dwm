@@ -51,6 +51,9 @@ exec dwm
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
 
+## Fonts
+This uses `Hack Nerd Font`. Download from https://www.nerdfonts.com/font-downloads
+
 ## Modifications
 - Added lock screen using lightdm tool <kbd>MOD</kbd><kbd>SHIFT</kbd> + <kbd>L</kbd>
 - Added full gaps
