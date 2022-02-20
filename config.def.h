@@ -1,5 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
+/* For extra keys such as volume up and down */
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
@@ -61,13 +64,15 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray4, "-nf", col_white1, "-sb", col_gray1, "-sf", col_gray3, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *lockcmd[]  = { "dm-tool", "lock", NULL };
+
+// lock screen (light-dm)
+// static const char *lockcmd[]  = { "dm-tool", "lock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd } },
+
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -92,6 +97,15 @@ static Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+
+    /* volume keys */
+	{ 0,                            XF86XK_AudioLowerVolume,  spawn,        SHCMD("amixer -q sset Master 2%- unmute; pkill -RTMIN+30 dwmblocks") },
+	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,        SHCMD("amixer -q sset Master 2%+ unmute; pkill -RTMIN+30 dwmblocks") },
+
+    /* lock when using display / login manager
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd } },
+    */
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

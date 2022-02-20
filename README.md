@@ -59,3 +59,4 @@ This uses `Hack Nerd Font`. Download from https://www.nerdfonts.com/font-downloa
 - Added full gaps
 - Theme colors
 - NerdFont icons
+- Volume integration with dwmblocks
