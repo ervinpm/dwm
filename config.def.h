@@ -5,11 +5,11 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int gappx     = 9;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10", "Hack Nerd Font Mono:size=12" };
+static const char *fonts[]          = { "Hack Nerd Font Mono:size=10","monospace:size=0" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#4c566a";
 static const char col_gray2[]       = "#434c5e";
@@ -17,10 +17,21 @@ static const char col_gray3[]       = "#3b4252";
 static const char col_gray4[]       = "#2e3440";
 static const char col_white1[]      = "#ffffff";
 static const char col_cyan[]        = "#005577";
+
+/** one dark theme **/
+static const char onedark_gray[]         = "#282C34";
+static const char onedark_red[]          = "#E06C75";
+static const char onedark_green[]        = "#98C379";
+static const char onedark_yellow[]       = "#E5C07B";
+static const char onedark_blue[]         = "#61AFEF";
+static const char onedark_purple[]       = "#C678DD";
+static const char onedark_cyan[]         = "#56B6C2";
+static const char onedark_lightgray[]    = "#ABB2BF";
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white1, col_gray4, col_gray3 },
-	[SchemeSel]  = { col_white1, col_gray1,  col_gray1 },
+	[SchemeNorm] = { onedark_lightgray, onedark_gray, onedark_green },
+	[SchemeSel]  = { onedark_gray, onedark_blue,  onedark_red },
 };
 
 /* tagging */
@@ -62,7 +73,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray4, "-nf", col_white1, "-sb", col_gray1, "-sf", col_gray3, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", onedark_gray, "-nf", onedark_lightgray, "-sb", onedark_green, "-sf", onedark_gray, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 // lock screen (light-dm)
@@ -99,8 +110,13 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 
     /* volume keys */
+	{ 0,                            XF86XK_AudioMute,  spawn,        SHCMD("amixer -q sset Master toggle; pkill -RTMIN+30 dwmblocks") },
 	{ 0,                            XF86XK_AudioLowerVolume,  spawn,        SHCMD("amixer -q sset Master 2%- unmute; pkill -RTMIN+30 dwmblocks") },
 	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,        SHCMD("amixer -q sset Master 2%+ unmute; pkill -RTMIN+30 dwmblocks") },
+
+    /* birghtness */
+	{ 0,                            XF86XK_MonBrightnessUp,  spawn,        SHCMD("xbacklight -inc 10; pkill -RTMIN+11 dwmblocks") },
+	{ 0,                            XF86XK_MonBrightnessDown,  spawn,        SHCMD("xbacklight -dec 10; pkill -RTMIN+11 dwmblocks") },
 
     /* lock when using display / login manager
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd } },
