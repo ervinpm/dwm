@@ -54,9 +54,11 @@ and (re)compiling the source code.
 ## Fonts
 This uses `Hack Nerd Font`. Download from https://www.nerdfonts.com/font-downloads
 
-## Modifications
+## Modifications / Patches
 - Added lock screen using lightdm tool <kbd>MOD</kbd><kbd>SHIFT</kbd> + <kbd>L</kbd>
 - Added full gaps
 - Theme colors
 - NerdFont icons
 - Volume integration with dwmblocks
+- Brightness controls using xbacklight
+- Status2d
